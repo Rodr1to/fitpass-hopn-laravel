@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MembershipPlan;
+use App\Http\Requests\StoreMembershipPlanRequest;
 use Illuminate\Http\Request;
 
 class MembershipPlanController extends Controller
@@ -12,7 +14,8 @@ class MembershipPlanController extends Controller
      */
     public function index()
     {
-        //
+        $plans = MembershipPlan::latest()->get();
+        return view('admin.plans.index', ['plans' => $plans]);
     }
 
     /**
@@ -28,7 +31,8 @@ class MembershipPlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MembershipPlan::create($request->validated());
+        return redirect()->route('admin.plans.index')->with('success', 'Plan created successfully!');
     }
 
     /**
