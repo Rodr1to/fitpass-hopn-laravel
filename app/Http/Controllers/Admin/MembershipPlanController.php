@@ -23,13 +23,13 @@ class MembershipPlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.plans.create'); // 👈 ADD THIS LINE
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMembershipPlanRequest $request)
     {
         MembershipPlan::create($request->validated());
         return redirect()->route('admin.plans.index')->with('success', 'Plan created successfully!');
