@@ -1,61 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Fitpass HOPn - Laravel Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository contains the Laravel backend and admin panel for the Fitpass HOPn wellness platform. It's built to manage companies, employees, membership plans, and partner facilities like gyms and spas.
 
-## About Laravel
+This project is part of a larger system that will eventually include a Next.js frontend, but this repository is exclusively for the API and server-side logic.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Status
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Sprint 1: Complete.**
+* Core Laravel project setup.
+* User authentication system with three roles (`employee`, `hr_admin`, `super_admin`).
+* Full CRUD (Create, Read, Update, Delete) functionality for Membership Plans.
+* Admin panel for managing plans, protected by role-based middleware.
+* Database seeders for default plans and users.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Development Environment
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+This project is configured for a **native macOS development environment** using Homebrew.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* **PHP Version:** 8.1+
+* **Database:** MySQL
+* **Package Manager:** Composer
+* **Framework:** Laravel 11
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Local Setup Instructions
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Follow these steps to get the project running on a new macOS machine.
 
-### Premium Partners
+### 1. Install Core Dependencies
+If you don't have them already, install Homebrew, PHP, Composer, and MySQL.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+# Install Homebrew (if you don't have it)
+/bin/bash -c "$(curl -fsSL [https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh](https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh))"
 
-## Contributing
+# Install PHP, Composer, and MySQL
+brew install php composer mysql
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Start the MySQL service and ensure it runs on login
+brew services start mysql
 
-## Code of Conduct
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Install Core Dependencies
+Clone this repository and configure your local environment.
 
-## Security Vulnerabilities
+```bash
+# Clone the repository from GitHub
+git clone [https://github.com/Rodr1to/fitpass-hopn-laravel.git](https://github.com/Rodr1to/fitpass-hopn-laravel.git)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Navigate into the project directory
+cd fitpass-hopn-laravel
 
-## License
+# Install all the required PHP packages
+composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Copy the example environment file
+cp .env.example .env
+
+# Generate a unique application key
+php artisan key:generate
+```
+
+### 3. Database setup
+You need to create the database and update your .env file to connect to it.
+
+First, open the .env file in your code editor and ensure the database credentials are set correctly for a default Homebrew MySQL installation:
+
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=fitpass_hopn
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Now, create the database and run the migrations with seed data.
+
+```bash
+# Log in to the MySQL client
+mysql -u root
+
+# Inside the MySQL prompt, create the database
+CREATE DATABASE fitpass_hopn;
+exit;
+
+# Run the migrations to create all tables and populate them with test data
+php artisan migrate:fresh --seed
+```
+
+### 4. Serve the Application
+You're all set! Start the local development server.
+
+```bash
+php artisan serve
+```
+
+The application will now be available at http://127.0.0.1:8000.
+
+---
+
+## Key Features & Routes
+
+### User Authentication
+### * Login: 
+```bash
+http://127.0.0.1:8000/login
+```
+
+### * Register: 
+```bash
+http://127.0.0.1:8000/register
+```
+
+### * Dashboard: 
+```bash
+http://127.0.0.1:8000/dashboard
+```
+
+### Admin Panel
+The admin panel is protected and can only be accessed by users with the hr_admin or super_admin role.
+
+### * Admin Base URL: 
+```bash
+http://127.0.0.1:8000/admin
+```
+
+### * Membership Plan Management: 
+```bash
+http://127.0.0.1:8000/admin/plans
+```
+
+### * Add New Plan Form: 
+```bash
+http://127.0.0.1:8000/admin/plans/create
+```
+
+---
+
+### Default user credentials
+
+| role        | email                  | password |
+|-------------|------------------------|----------|
+| Super Admin | superadmin@fitpass.com | password |
+| HR Admin    | hr@fitpass.com         | password |
+| Employee    | employee@fitpass.com   | password |
+
