@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->enum('role', ['employee', 'hr_admin', 'super_admin'])
+                  ->default('employee')
+                  ->after('password'); // Place it after the password column
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
