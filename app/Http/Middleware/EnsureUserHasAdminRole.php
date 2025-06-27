@@ -15,6 +15,11 @@ class EnsureUserHasAdminRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        // Check if a user is logged in AND if their role is one of the admin types
+        if ($request->user() && in_array($request->user()->role, ['hr_admin', 'super_admin'])) {
+            return $next($request); // If yes, allow the request to continue
+        }
+
+        abort(403, 'UNAUTHORIZED ACTION'); // If no, stop and show a "Forbidden" error
     }
 }
