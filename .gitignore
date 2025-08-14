@@ -1,0 +1,4 @@
+apps/frontend/.next/
+apps/frontend/node_modules/
+apps/frontend/.env.local
+apps/frontend/dist/
