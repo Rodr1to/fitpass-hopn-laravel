@@ -12,8 +12,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.idea
-.vscode
 
 # Frontend Application (in /apps/frontend)
 /apps/frontend/node_modules
@@ -24,3 +22,7 @@ yarn-error.log
 
 # macOS files
 .DS_Store
+
+# IDE files
+.idea
+.vscode
