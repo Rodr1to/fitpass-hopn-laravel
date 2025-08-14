@@ -1,4 +1,26 @@
-apps/frontend/.next/
-apps/frontend/node_modules/
-apps/frontend/.env.local
-apps/frontend/dist/
+# Laravel Framework
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.idea
+.vscode
+
+# Frontend Application (in /apps/frontend)
+/apps/frontend/node_modules
+/apps/frontend/dist
+/apps/frontend/.next
+/apps/frontend/.env.local
+/apps/frontend/.env.*.local
+
+# macOS files
+.DS_Store
