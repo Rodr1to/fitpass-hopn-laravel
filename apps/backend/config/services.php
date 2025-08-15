@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    // In config/services.php
+    'ai' => [
+        'recommender_url' => env('AI_RECOMMENDER_URL'),
+        'anomaly_url' => env('AI_ANOMALY_URL'),
+        'router_url' => env('AI_ROUTER_URL'),
+    ],    
+
 ];
